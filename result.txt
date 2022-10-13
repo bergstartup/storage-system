@@ -1,7 +1,7 @@
-VM ID: 1
+VM ID: 0
 Repeats: 5
 Group number: group19
-Group commit: "7b45f8a54747cfa8e7793b636378b1d7455cabab"
+Group commit: "9ae163c5d6b639fc38d1cbe3d8201ed6929516c6"
 
 Milestone m45
 	Directory: 2022-stosys-group19
@@ -55,7 +55,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 291 milliseconds
+		stosys-stats] The elapsed time is 319 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -103,7 +103,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 313 milliseconds
+		stosys-stats] The elapsed time is 258 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -151,7 +151,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 297 milliseconds
+		stosys-stats] The elapsed time is 145 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -199,7 +199,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 296 milliseconds
+		stosys-stats] The elapsed time is 251 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -247,7 +247,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 198 milliseconds
+		stosys-stats] The elapsed time is 144 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -295,7 +295,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 3503 milliseconds
+		stosys-stats] The elapsed time is 4776 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -343,7 +343,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 3512 milliseconds
+		stosys-stats] The elapsed time is 5040 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -391,7 +391,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 3527 milliseconds
+		stosys-stats] The elapsed time is 4599 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -439,7 +439,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 3657 milliseconds
+		stosys-stats] The elapsed time is 4619 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -487,7 +487,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 3494 milliseconds
+		stosys-stats] The elapsed time is 4623 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 2
@@ -535,7 +535,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 34696 milliseconds
+		stosys-stats] The elapsed time is 8070 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 2
@@ -583,7 +583,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 33617 milliseconds
+		stosys-stats] The elapsed time is 8112 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 2
@@ -631,7 +631,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 34870 milliseconds
+		stosys-stats] The elapsed time is 8143 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 2
@@ -679,7 +679,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 37127 milliseconds
+		stosys-stats] The elapsed time is 8207 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 2
@@ -727,7 +727,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 36860 milliseconds
+		stosys-stats] The elapsed time is 8078 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 3
@@ -775,7 +775,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 124280 milliseconds
+		stosys-stats] The elapsed time is 48751 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 3
@@ -823,7 +823,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 123398 milliseconds
+		stosys-stats] The elapsed time is 48827 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 3
@@ -871,7 +871,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 123663 milliseconds
+		stosys-stats] The elapsed time is 48844 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 3
@@ -919,7 +919,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 123457 milliseconds
+		stosys-stats] The elapsed time is 49140 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 3
@@ -967,7 +967,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 122526 milliseconds
+		stosys-stats] The elapsed time is 48664 milliseconds
 		====================================================================
 		--------------------------------------------------
-Total run time: 162135 milliseconds
+Total run time: 61813 milliseconds
