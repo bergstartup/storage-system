@@ -1,7 +1,7 @@
 VM ID: 0
 Repeats: 5
 Group number: group19
-Group commit: "235e6cb6f55324323e62457dcaa3bac9bdb09c92"
+Group commit: "0f29775cb9065e8b6cdb67f84bc4b1d6db3e3eaa"
 
 Milestone m45
 	Directory: 2022-stosys-group19
@@ -55,7 +55,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 567 milliseconds
+		stosys-stats] The elapsed time is 509 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -103,7 +103,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 249 milliseconds
+		stosys-stats] The elapsed time is 257 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -151,7 +151,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 263 milliseconds
+		stosys-stats] The elapsed time is 268 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -199,7 +199,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 156 milliseconds
+		stosys-stats] The elapsed time is 269 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -247,7 +247,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 159 milliseconds
+		stosys-stats] The elapsed time is 275 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -255,7 +255,7 @@ Milestone m45
 		sudo rm -rf /tmp/shadowdb
 		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 100 -v 100
 	Verify code
-		ERROR: Incorrect output
+		SUCCESS: Got output as expected
 		--------------------------------------------------
 		==============================================================
 		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
@@ -284,43 +284,218 @@ Milestone m45
 		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
 		Delete file called
 		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 200
+		a testmap is filled with 10000 of max_size 200 each
+		All values inserted, number of entries 10000, expected size stores would be 2000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 211416 milliseconds
+		====================================================================
 		--------------------------------------------------
-		ERROR: Found an error
+	Execute code for experiment 1
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
 		--------------------------------------------------
-		AddressSanitizer:DEADLYSIGNAL
-		=================================================================
-		==370352==ERROR: AddressSanitizer: SEGV on unknown address 0x625220d941f0 (pc 0x7fc738cd8fc4 bp 0x7ffe9acb18d0 sp 0x7ffe9acb1818 T0)
-		==370352==The signal is caused by a READ memory access.
-		    #0 0x7fc738cd8fc3 in __pthread_mutex_lock (/lib/x86_64-linux-gnu/libpthread.so.0+0xafc3)
-		    #1 0x7fc738c91024 in zns_udevice_write /home/user/2022-stosys-group19/src/m23-ftl/zns_device.cpp:349
-		    #2 0x55b733088c6d in rocksdb::Store_To_NVM(rocksdb::MYFS*, unsigned long, void*, unsigned long) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:118
-		    #3 0x55b73309afe8 in rocksdb::MYFS_File::PAppend(unsigned long, unsigned long, char*) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:1008
-		    #4 0x55b73309b464 in rocksdb::MYFS_File::Append(unsigned long, char*) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:1018
-		    #5 0x55b73309d7ac in rocksdb::MYFS_WritableFile::Append(rocksdb::Slice const&, rocksdb::IOOptions const&, rocksdb::IODebugContext*) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:1096
-		    #6 0x55b73326c896 in rocksdb::WritableFileWriter::WriteBuffered(char const*, unsigned long) file/writable_file_writer.cc:495
-		    #7 0x55b73326de1c in rocksdb::WritableFileWriter::Flush() file/writable_file_writer.cc:301
-		    #8 0x55b73319fa87 in rocksdb::log::Writer::AddRecord(rocksdb::Slice const&) db/log_writer.cc:108
-		    #9 0x55b73314095e in rocksdb::DBImpl::WriteToWAL(rocksdb::WriteBatch const&, rocksdb::log::Writer*, unsigned long*, unsigned long*) db/db_impl/db_impl_write.cc:1075
-		    #10 0x55b733142315 in rocksdb::DBImpl::WriteToWAL(rocksdb::WriteThread::WriteGroup const&, rocksdb::log::Writer*, unsigned long*, bool, bool, unsigned long) db/db_impl/db_impl_write.cc:1113
-		    #11 0x55b73314b893 in rocksdb::DBImpl::WriteImpl(rocksdb::WriteOptions const&, rocksdb::WriteBatch*, rocksdb::WriteCallback*, unsigned long*, unsigned long, bool, unsigned long*, unsigned long, rocksdb::PreReleaseCallback*) db/db_impl/db_impl_write.cc:329
-		    #12 0x55b73314ba34 in rocksdb::DBImpl::Write(rocksdb::WriteOptions const&, rocksdb::WriteBatch*) db/db_impl/db_impl_write.cc:54
-		    #13 0x55b73314bd29 in rocksdb::DB::Put(rocksdb::WriteOptions const&, rocksdb::ColumnFamilyHandle*, rocksdb::Slice const&, rocksdb::Slice const&) db/db_impl/db_impl_write.cc:2011
-		    #14 0x55b73314bde4 in rocksdb::DBImpl::Put(rocksdb::WriteOptions const&, rocksdb::ColumnFamilyHandle*, rocksdb::Slice const&, rocksdb::Slice const&) db/db_impl/db_impl_write.cc:24
-		    #15 0x55b7330dcb22 in rocksdb::DB::Put(rocksdb::WriteOptions const&, rocksdb::Slice const&, rocksdb::Slice const&) (/home/user/2022-stosys-group19/bin/m45+0x12db22)
-		    #16 0x55b73307ad97 in main /home/user/2022-stosys-group19/src/m45-rocksdb/m45_main.cc:270
-		    #17 0x7fc737c810b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x240b2)
-		    #18 0x55b73307525d in _start (/home/user/2022-stosys-group19/bin/m45+0xc625d)
-		AddressSanitizer can not provide additional info.
-		SUMMARY: AddressSanitizer: SEGV (/lib/x86_64-linux-gnu/libpthread.so.0+0xafc3) in __pthread_mutex_lock
-		==370352==ABORTING
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 200
+		a testmap is filled with 10000 of max_size 200 each
+		All values inserted, number of entries 10000, expected size stores would be 2000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 211857 milliseconds
+		====================================================================
 		--------------------------------------------------
-	Stop execution for this group
+	Execute code for experiment 1
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 200
+		a testmap is filled with 10000 of max_size 200 each
+		All values inserted, number of entries 10000, expected size stores would be 2000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 211789 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 1
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 200
+		a testmap is filled with 10000 of max_size 200 each
+		All values inserted, number of entries 10000, expected size stores would be 2000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 214202 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 1
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 200
+		a testmap is filled with 10000 of max_size 200 each
+		All values inserted, number of entries 10000, expected size stores would be 2000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 214449 milliseconds
+		====================================================================
+		--------------------------------------------------
 	Execute code for experiment 2
 		sudo nvme zns reset-zone /dev/nvme0n1 -a
 		sudo rm -rf /tmp/shadowdb
 		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 1000 -v 1000
 	Verify code
-		ERROR: Incorrect output
+		SUCCESS: Got output as expected
 		--------------------------------------------------
 		==============================================================
 		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
@@ -349,51 +524,33 @@ Milestone m45
 		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
 		Delete file called
 		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 2000
+		a testmap is filled with 10000 of max_size 2000 each
+		All values inserted, number of entries 10000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 122235 milliseconds
+		====================================================================
 		--------------------------------------------------
-		ERROR: Found an error
-		--------------------------------------------------
-		AddressSanitizer:DEADLYSIGNAL
-		=================================================================
-		==370396==ERROR: AddressSanitizer: SEGV on unknown address 0x62722f428ed0 (pc 0x7f2e39897fc4 bp 0x7fff0e0b9850 sp 0x7fff0e0b9798 T0)
-		==370396==The signal is caused by a READ memory access.
-		    #0 0x7f2e39897fc3 in __pthread_mutex_lock (/lib/x86_64-linux-gnu/libpthread.so.0+0xafc3)
-		    #1 0x7f2e39850024 in zns_udevice_write /home/user/2022-stosys-group19/src/m23-ftl/zns_device.cpp:349
-		    #2 0x56121842ac6d in rocksdb::Store_To_NVM(rocksdb::MYFS*, unsigned long, void*, unsigned long) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:118
-		    #3 0x56121843af7e in rocksdb::get_blocks_addr(rocksdb::MYFS*, rocksdb::Inode*, unsigned long, unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >*, bool) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:932
-		    #4 0x56121843cb7e in rocksdb::MYFS_File::PAppend(unsigned long, unsigned long, char*) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:996
-		    #5 0x56121843d464 in rocksdb::MYFS_File::Append(unsigned long, char*) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:1018
-		    #6 0x56121843f7ac in rocksdb::MYFS_WritableFile::Append(rocksdb::Slice const&, rocksdb::IOOptions const&, rocksdb::IODebugContext*) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:1096
-		    #7 0x56121860e896 in rocksdb::WritableFileWriter::WriteBuffered(char const*, unsigned long) file/writable_file_writer.cc:495
-		    #8 0x56121860fe1c in rocksdb::WritableFileWriter::Flush() file/writable_file_writer.cc:301
-		    #9 0x561218541a87 in rocksdb::log::Writer::AddRecord(rocksdb::Slice const&) db/log_writer.cc:108
-		    #10 0x5612184e295e in rocksdb::DBImpl::WriteToWAL(rocksdb::WriteBatch const&, rocksdb::log::Writer*, unsigned long*, unsigned long*) db/db_impl/db_impl_write.cc:1075
-		    #11 0x5612184e4315 in rocksdb::DBImpl::WriteToWAL(rocksdb::WriteThread::WriteGroup const&, rocksdb::log::Writer*, unsigned long*, bool, bool, unsigned long) db/db_impl/db_impl_write.cc:1113
-		    #12 0x5612184ed893 in rocksdb::DBImpl::WriteImpl(rocksdb::WriteOptions const&, rocksdb::WriteBatch*, rocksdb::WriteCallback*, unsigned long*, unsigned long, bool, unsigned long*, unsigned long, rocksdb::PreReleaseCallback*) db/db_impl/db_impl_write.cc:329
-		    #13 0x5612184eda34 in rocksdb::DBImpl::Write(rocksdb::WriteOptions const&, rocksdb::WriteBatch*) db/db_impl/db_impl_write.cc:54
-		    #14 0x5612184edd29 in rocksdb::DB::Put(rocksdb::WriteOptions const&, rocksdb::ColumnFamilyHandle*, rocksdb::Slice const&, rocksdb::Slice const&) db/db_impl/db_impl_write.cc:2011
-		    #15 0x5612184edde4 in rocksdb::DBImpl::Put(rocksdb::WriteOptions const&, rocksdb::ColumnFamilyHandle*, rocksdb::Slice const&, rocksdb::Slice const&) db/db_impl/db_impl_write.cc:24
-		    #16 0x56121847eb22 in rocksdb::DB::Put(rocksdb::WriteOptions const&, rocksdb::Slice const&, rocksdb::Slice const&) (/home/user/2022-stosys-group19/bin/m45+0x12db22)
-		    #17 0x56121841cd97 in main /home/user/2022-stosys-group19/src/m45-rocksdb/m45_main.cc:270
-		    #18 0x7f2e388400b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x240b2)
-		    #19 0x56121841725d in _start (/home/user/2022-stosys-group19/bin/m45+0xc625d)
-		AddressSanitizer can not provide additional info.
-		SUMMARY: AddressSanitizer: SEGV (/lib/x86_64-linux-gnu/libpthread.so.0+0xafc3) in __pthread_mutex_lock
-		==370396==ABORTING
-		--------------------------------------------------
-	Stop execution for this group
-	Execute code for experiment 3
+	Execute code for experiment 2
 		sudo nvme zns reset-zone /dev/nvme0n1 -a
 		sudo rm -rf /tmp/shadowdb
-		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 1000 -v 1000
 	Verify code
-		ERROR: Incorrect output
+		SUCCESS: Got output as expected
 		--------------------------------------------------
 		==============================================================
 		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
 		==============================================================
 		==============================================================
 		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
-		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		entries 10000, each entry ksize 1000 bytes, vsize 1000 bytes, readonly verify : 0 deleteall : 1 single : 0
 		==============================================================
 		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
 		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
@@ -415,35 +572,170 @@ Milestone m45
 		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
 		Delete file called
 		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 2000
+		a testmap is filled with 10000 of max_size 2000 each
+		All values inserted, number of entries 10000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 123219 milliseconds
+		====================================================================
 		--------------------------------------------------
-		ERROR: Found an error
+	Execute code for experiment 2
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 1000 -v 1000
+	Verify code
+		SUCCESS: Got output as expected
 		--------------------------------------------------
-		AddressSanitizer:DEADLYSIGNAL
-		=================================================================
-		==370440==ERROR: AddressSanitizer: SEGV on unknown address 0x625580014140 (pc 0x7fe9459a1fc4 bp 0x7ffcb3e1e500 sp 0x7ffcb3e1e448 T0)
-		==370440==The signal is caused by a READ memory access.
-		    #0 0x7fe9459a1fc3 in __pthread_mutex_lock (/lib/x86_64-linux-gnu/libpthread.so.0+0xafc3)
-		    #1 0x7fe94595a024 in zns_udevice_write /home/user/2022-stosys-group19/src/m23-ftl/zns_device.cpp:349
-		    #2 0x55c048f6ac6d in rocksdb::Store_To_NVM(rocksdb::MYFS*, unsigned long, void*, unsigned long) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:118
-		    #3 0x55c048f7cfe8 in rocksdb::MYFS_File::PAppend(unsigned long, unsigned long, char*) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:1008
-		    #4 0x55c048f7d464 in rocksdb::MYFS_File::Append(unsigned long, char*) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:1018
-		    #5 0x55c048f7f7ac in rocksdb::MYFS_WritableFile::Append(rocksdb::Slice const&, rocksdb::IOOptions const&, rocksdb::IODebugContext*) /home/user/2022-stosys-group19/src/m45-rocksdb/S2FileSystem.cc:1096
-		    #6 0x55c04914e896 in rocksdb::WritableFileWriter::WriteBuffered(char const*, unsigned long) file/writable_file_writer.cc:495
-		    #7 0x55c04914fe1c in rocksdb::WritableFileWriter::Flush() file/writable_file_writer.cc:301
-		    #8 0x55c049081a87 in rocksdb::log::Writer::AddRecord(rocksdb::Slice const&) db/log_writer.cc:108
-		    #9 0x55c04902295e in rocksdb::DBImpl::WriteToWAL(rocksdb::WriteBatch const&, rocksdb::log::Writer*, unsigned long*, unsigned long*) db/db_impl/db_impl_write.cc:1075
-		    #10 0x55c049024315 in rocksdb::DBImpl::WriteToWAL(rocksdb::WriteThread::WriteGroup const&, rocksdb::log::Writer*, unsigned long*, bool, bool, unsigned long) db/db_impl/db_impl_write.cc:1113
-		    #11 0x55c04902d893 in rocksdb::DBImpl::WriteImpl(rocksdb::WriteOptions const&, rocksdb::WriteBatch*, rocksdb::WriteCallback*, unsigned long*, unsigned long, bool, unsigned long*, unsigned long, rocksdb::PreReleaseCallback*) db/db_impl/db_impl_write.cc:329
-		    #12 0x55c04902da34 in rocksdb::DBImpl::Write(rocksdb::WriteOptions const&, rocksdb::WriteBatch*) db/db_impl/db_impl_write.cc:54
-		    #13 0x55c04902dd29 in rocksdb::DB::Put(rocksdb::WriteOptions const&, rocksdb::ColumnFamilyHandle*, rocksdb::Slice const&, rocksdb::Slice const&) db/db_impl/db_impl_write.cc:2011
-		    #14 0x55c04902dde4 in rocksdb::DBImpl::Put(rocksdb::WriteOptions const&, rocksdb::ColumnFamilyHandle*, rocksdb::Slice const&, rocksdb::Slice const&) db/db_impl/db_impl_write.cc:24
-		    #15 0x55c048fbeb22 in rocksdb::DB::Put(rocksdb::WriteOptions const&, rocksdb::Slice const&, rocksdb::Slice const&) (/home/user/2022-stosys-group19/bin/m45+0x12db22)
-		    #16 0x55c048f5cd97 in main /home/user/2022-stosys-group19/src/m45-rocksdb/m45_main.cc:270
-		    #17 0x7fe94494a0b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x240b2)
-		    #18 0x55c048f5725d in _start (/home/user/2022-stosys-group19/bin/m45+0xc625d)
-		AddressSanitizer can not provide additional info.
-		SUMMARY: AddressSanitizer: SEGV (/lib/x86_64-linux-gnu/libpthread.so.0+0xafc3) in __pthread_mutex_lock
-		==370440==ABORTING
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 1000 bytes, vsize 1000 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 2000
+		a testmap is filled with 10000 of max_size 2000 each
+		All values inserted, number of entries 10000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 121089 milliseconds
+		====================================================================
 		--------------------------------------------------
+	Execute code for experiment 2
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 1000 -v 1000
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 1000 bytes, vsize 1000 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 2000
+		a testmap is filled with 10000 of max_size 2000 each
+		All values inserted, number of entries 10000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 123189 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 2
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 1000 -v 1000
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 1000 bytes, vsize 1000 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 2000
+		a testmap is filled with 10000 of max_size 2000 each
+		All values inserted, number of entries 10000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 121810 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 3
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+		ERROR: Command did not complete in 20 minutes
+	Verify code
+		ERROR: No output
 	Stop execution for this group
 No total runtime - only printed when everything is working
