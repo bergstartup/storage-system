@@ -1,0 +1,35 @@
+VM ID: 0
+Repeats: 5
+Group number: group19
+Group commit: "7577114974799e9b226ea4f49f9945231f4b0470"
+
+Milestone m45
+	Directory: 2022-stosys-group19
+	Start compiling ...
+		rm -r CMakeCache.txt CMakeFiles Makefile bin cmake_install.cmake lib
+		cd libnvme && make clean
+		cmake .
+		make -j
+		ERROR: Did not compile
+		Scanning dependencies of target m1
+		Scanning dependencies of target stosys
+		[  7%] Building CXX object CMakeFiles/m1.dir/src/m1/device.cpp.o
+		[ 15%] Building CXX object CMakeFiles/m1.dir/src/common/nvmeprint.cpp.o
+		[ 23%] Building CXX object CMakeFiles/m1.dir/src/m1/m1.cpp.o
+		[ 30%] Building CXX object CMakeFiles/m1.dir/src/common/utils.cpp.o
+		[ 38%] Building CXX object CMakeFiles/stosys.dir/src/common/nvmeprint.cpp.o
+		[ 46%] Building CXX object CMakeFiles/stosys.dir/src/m23-ftl/zns_device.cpp.o
+		[ 53%] Building CXX object CMakeFiles/stosys.dir/src/common/utils.cpp.o
+		[ 61%] Linking CXX shared library lib/libstosys.so
+		[ 69%] Linking CXX executable bin/m1
+		[ 69%] Built target stosys
+		[ 69%] Built target m1
+		Scanning dependencies of target m2
+		Scanning dependencies of target m3
+		[ 76%] Building CXX object CMakeFiles/m2.dir/src/m23-ftl/m2.cpp.o
+		[ 84%] Building CXX object CMakeFiles/m3.dir/src/m23-ftl/m3.cpp.o
+		[ 92%] Linking CXX executable bin/m2
+		[ 92%] Built target m2
+		[100%] Linking CXX executable bin/m3
+		[100%] Built target m3
+		Could not find binary /bin/m45 after compiling
