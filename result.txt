@@ -1,7 +1,7 @@
-VM ID: 0
+VM ID: 1
 Repeats: 5
 Group number: group19
-Group commit: "0f29775cb9065e8b6cdb67f84bc4b1d6db3e3eaa"
+Group commit: "7b45f8a54747cfa8e7793b636378b1d7455cabab"
 
 Milestone m45
 	Directory: 2022-stosys-group19
@@ -55,7 +55,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 509 milliseconds
+		stosys-stats] The elapsed time is 291 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -103,7 +103,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 257 milliseconds
+		stosys-stats] The elapsed time is 313 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -151,7 +151,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 268 milliseconds
+		stosys-stats] The elapsed time is 297 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -199,7 +199,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 269 milliseconds
+		stosys-stats] The elapsed time is 296 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 0
@@ -247,7 +247,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 275 milliseconds
+		stosys-stats] The elapsed time is 198 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -295,7 +295,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 211416 milliseconds
+		stosys-stats] The elapsed time is 3503 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -343,7 +343,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 211857 milliseconds
+		stosys-stats] The elapsed time is 3512 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -391,7 +391,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 211789 milliseconds
+		stosys-stats] The elapsed time is 3527 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -439,7 +439,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 214202 milliseconds
+		stosys-stats] The elapsed time is 3657 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 1
@@ -487,7 +487,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 214449 milliseconds
+		stosys-stats] The elapsed time is 3494 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 2
@@ -535,7 +535,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 122235 milliseconds
+		stosys-stats] The elapsed time is 34696 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 2
@@ -583,7 +583,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 123219 milliseconds
+		stosys-stats] The elapsed time is 33617 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 2
@@ -631,7 +631,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 121089 milliseconds
+		stosys-stats] The elapsed time is 34870 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 2
@@ -679,7 +679,7 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 123189 milliseconds
+		stosys-stats] The elapsed time is 37127 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 2
@@ -727,15 +727,247 @@ Milestone m45
 		Delete file called
 		database(s) closed, test is done OK
 		====================================================================
-		stosys-stats] The elapsed time is 121810 milliseconds
+		stosys-stats] The elapsed time is 36860 milliseconds
 		====================================================================
 		--------------------------------------------------
 	Execute code for experiment 3
 		sudo nvme zns reset-zone /dev/nvme0n1 -a
 		sudo rm -rf /tmp/shadowdb
 		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
-		ERROR: Command did not complete in 20 minutes
 	Verify code
-		ERROR: No output
-	Stop execution for this group
-No total runtime - only printed when everything is working
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100000 entries, max size 200
+		a testmap is filled with 100000 of max_size 200 each
+		All values inserted, number of entries 100000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 124280 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 3
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100000 entries, max size 200
+		a testmap is filled with 100000 of max_size 200 each
+		All values inserted, number of entries 100000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 123398 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 3
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100000 entries, max size 200
+		a testmap is filled with 100000 of max_size 200 each
+		All values inserted, number of entries 100000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 123663 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 3
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100000 entries, max size 200
+		a testmap is filled with 100000 of max_size 200 each
+		All values inserted, number of entries 100000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 123457 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 3
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100000 entries, max size 200
+		a testmap is filled with 100000 of max_size 200 each
+		All values inserted, number of entries 100000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 122526 milliseconds
+		====================================================================
+		--------------------------------------------------
+Total run time: 162135 milliseconds
