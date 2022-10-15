@@ -129,10 +129,10 @@ if(STOSYS_M45)
     #pkg_search_module(BZip2 REQUIRED IMPORTED_TARGET bzip2)
     find_package(BZip2)
 
-    add_executable(m45 src/m45-rocksdb/m45_main.cc src/m45-rocksdb/rocks_s2fs.cc src/m45-rocksdb/S2FileSystem.cc src/m45-rocksdb/S2FileSystem.h src/m45-rocksdb/DummyFSForward.cc src/m45-rocksdb/DummyFSForward.h)
+    add_executable(m45 src/m45-rocksdb/m45_main.cc src/m45-rocksdb/rocks_s2fs.cc src/m45-rocksdb/S2FileSystem.cc src/m45-rocksdb/S2FileSystem.h src/m45-rocksdb/DummyFSForward.cc src/m45-rocksdb/DummyFSForward.h /home/user/2022-stosys-group19/src/m45-rocksdb/MYFS.cc /home/user/2022-stosys-group19/src/m45-rocksdb/MYFS.h /home/user/2022-stosys-group19/src/m45-rocksdb/MYFS_IO.cc /home/user/2022-stosys-group19/src/m45-rocksdb/MYFS_IO.h)
     # see all the defined variables here: https://cmake.org/cmake/help/latest/module/FindPkgConfig.html
     add_definitions (${NVME_CFLAGS} ${ROCKSDB_CFLAGS}  ${ROCKSDB_STATIC_CFLAGS} ${ROCKSDB_CFLAGS_OTHER})
-    target_link_libraries(m45 pthread stosys ${ROCKSDB_STATIC_LIBRARIES} ${SNAPPY_LIBRARIES} ${ZSTD_LIBRARIES} ${LZ4_LIBRARIES} ${BZIP2_LIBRARIES})
+    target_link_libraries(m45 pthread stosys ${ROCKSDB_STATIC_LIBRARIES} ${SNAPPY_LIBRARIES} ${ZSTD_LIBRARIES} ${LZ4_LIBRARIES} ${BZIP2_LIBRARIES} /home/user/2022-stosys-group19/src/m45-rocksdb/MYFS.cc)
     # if we are not going to install the headers then we need to tell where they are
     target_include_directories(m45 PRIVATE ./src/m23-ftl/ ./src/common/)
 else()
