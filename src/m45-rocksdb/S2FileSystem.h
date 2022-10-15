@@ -32,18 +32,12 @@ SOFTWARE.
 #include <MYFS.h>
 #include <iostream>
 
-<<<<<<< Updated upstream
-namespace ROCKSDB_NAMESPACE {
-
-    class S2FileSystem : public FileSystem {
-=======
 
 
 namespace ROCKSDB_NAMESPACE
 {   
     class S2FileSystem : public FileSystem
     {
->>>>>>> Stashed changes
     public:
         // No copying allowed
         S2FileSystem(std::string uri, bool debug);
@@ -141,10 +135,7 @@ namespace ROCKSDB_NAMESPACE
         struct user_zns_device *_zns_dev;
         std::string _uri;
         const std::string _fs_delimiter = "/";
-<<<<<<< Updated upstream
-=======
         struct MYFS::MYFS_META *FileSystemObj;
->>>>>>> Stashed changes
     };
 }
 
