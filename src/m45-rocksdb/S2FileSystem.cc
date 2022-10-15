@@ -60,18 +60,20 @@ namespace ROCKSDB_NAMESPACE
         struct zdev_init_params params;
         std::string device = uri_db_path.substr(uri_db_path.find(sdelimiter) + sdelimiter.size(),
                                                 uri_db_path.find(edelimiter) -
-                                                (uri_db_path.find(sdelimiter) + sdelimiter.size()));
-        //make sure to setup these parameters properly and check the forced reset flag for M5
+                                                    (uri_db_path.find(sdelimiter) + sdelimiter.size()));
+        // make sure to setup these parameters properly and check the forced reset flag for M5
         params.name = strdup(device.c_str());
         params.log_zones = 3;
         params.gc_wmark = 1;
         params.force_reset = true;
         int ret = init_ss_zns_device(&params, &this->_zns_dev);
-        if(ret != 0){
+        free(params.name);
+        if (ret != 0)
+        {
             std::cout << "Error: " << uri_db_path << " failed to open the device " << device.c_str() << "\n";
             std::cout << "Error: ret " << ret << "\n";
         }
-        assert (ret == 0);
+        assert(ret == 0);
         assert(this->_zns_dev->lba_size_bytes != 0);
         assert(this->_zns_dev->capacity_bytes != 0);
         ss_dprintf(DBG_FS_1, "device %s is opened and initialized, reported LBA size is %u and capacity %lu \n",
@@ -150,7 +152,8 @@ namespace ROCKSDB_NAMESPACE
         return IOStatus::OK();
     }
 
-    IOStatus S2FileSystem::IsDirectory(const std::string &, const IOOptions &options, bool *is_dir, IODebugContext *) {
+    IOStatus S2FileSystem::IsDirectory(const std::string &, const IOOptions &options, bool *is_dir, IODebugContext *)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
@@ -176,7 +179,8 @@ namespace ROCKSDB_NAMESPACE
         return IOStatus::OK();
     }
 
-    const char *S2FileSystem::Name() const {
+    const char *S2FileSystem::Name() const
+    {
         return "S2FileSytem";
     }
 
@@ -205,16 +209,19 @@ namespace ROCKSDB_NAMESPACE
     }
 
     IOStatus S2FileSystem::ReopenWritableFile(const std::string &, const FileOptions &, std::unique_ptr<FSWritableFile> *,
-                                              IODebugContext *) {
+                                              IODebugContext *)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
     IOStatus S2FileSystem::NewRandomRWFile(const std::string &, const FileOptions &, std::unique_ptr<FSRandomRWFile> *,
-                                           IODebugContext *) {
+                                           IODebugContext *)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
-    IOStatus S2FileSystem::NewMemoryMappedFileBuffer(const std::string &, std::unique_ptr<MemoryMappedFileBuffer> *) {
+    IOStatus S2FileSystem::NewMemoryMappedFileBuffer(const std::string &, std::unique_ptr<MemoryMappedFileBuffer> *)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
@@ -234,11 +241,13 @@ namespace ROCKSDB_NAMESPACE
         return IOStatus::OK();
     }
 
-    IOStatus S2FileSystem::GetFreeSpace(const std::string &, const IOOptions &, uint64_t *, IODebugContext *) {
+    IOStatus S2FileSystem::GetFreeSpace(const std::string &, const IOOptions &, uint64_t *, IODebugContext *)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
-    IOStatus S2FileSystem::Truncate(const std::string &, size_t, const IOOptions &, IODebugContext *) {
+    IOStatus S2FileSystem::Truncate(const std::string &, size_t, const IOOptions &, IODebugContext *)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
@@ -288,38 +297,48 @@ namespace ROCKSDB_NAMESPACE
         return IOStatus::OK();
     }
 
-    IOStatus S2FileSystem::DeleteDir(const std::string &dirname, const IOOptions &options, IODebugContext *dbg) {
+    IOStatus S2FileSystem::DeleteDir(const std::string &dirname, const IOOptions &options, IODebugContext *dbg)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
     IOStatus S2FileSystem::GetFileModificationTime(const std::string &fname, const IOOptions &options, uint64_t *file_mtime,
-                                                   IODebugContext *dbg) {
+                                                   IODebugContext *dbg)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
     IOStatus S2FileSystem::GetAbsolutePath(const std::string &db_path, const IOOptions &options, std::string *output_path,
-                                           IODebugContext *dbg) {
-        return IOStatus::IOError(__FUNCTION__);
+                                           IODebugContext *dbg)
+    {
+        //*output_path = db_path;
+        return IOStatus::OK();
     }
 
-    IOStatus S2FileSystem::DeleteFile(const std::string &fname, const IOOptions &options, IODebugContext *dbg) {
-        return IOStatus::IOError(__FUNCTION__);
+    IOStatus S2FileSystem::DeleteFile(const std::string &fname, const IOOptions &options, IODebugContext *dbg)
+    {
+        // MYFS_DeletePath(this->FileSystemObj, fname);
+        std::cout<<"Delete file called"<<std::endl;
+        return IOStatus::OK();
     }
 
     IOStatus S2FileSystem::NewLogger(const std::string &fname, const IOOptions &io_opts, std::shared_ptr<Logger> *result,
-                                     IODebugContext *dbg) {
+                                     IODebugContext *dbg)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
-    IOStatus S2FileSystem::GetTestDirectory(const IOOptions &options, std::string *path, IODebugContext *dbg) {
+    IOStatus S2FileSystem::GetTestDirectory(const IOOptions &options, std::string *path, IODebugContext *dbg)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
     // Release the lock acquired by a previous successful call to LockFile.
     // REQUIRES: lock was returned by a successful LockFile() call
     // REQUIRES: lock has not already been unlocked.
-    IOStatus S2FileSystem::UnlockFile(FileLock *lock, const IOOptions &options, IODebugContext *dbg) {
-        return IOStatus::IOError(__FUNCTION__);
+    IOStatus S2FileSystem::UnlockFile(FileLock *lock, const IOOptions &options, IODebugContext *dbg)
+    {
+        return IOStatus::OK();
     }
 
     // Lock the specified file.  Used to prevent concurrent access to
@@ -336,20 +355,24 @@ namespace ROCKSDB_NAMESPACE
     // to go away.
     //
     // May create the named file if it does not already exist.
-    IOStatus S2FileSystem::LockFile(const std::string &fname, const IOOptions &options, FileLock **lock, IODebugContext *dbg) {
-        return IOStatus::IOError(__FUNCTION__);
+    IOStatus S2FileSystem::LockFile(const std::string &fname, const IOOptions &options, FileLock **lock, IODebugContext *dbg)
+    {
+        return IOStatus::OK();
     }
 
     IOStatus
-    S2FileSystem::AreFilesSame(const std::string &, const std::string &, const IOOptions &, bool *, IODebugContext *) {
+    S2FileSystem::AreFilesSame(const std::string &, const std::string &, const IOOptions &, bool *, IODebugContext *)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
-    IOStatus S2FileSystem::NumFileLinks(const std::string &, const IOOptions &, uint64_t *, IODebugContext *) {
+    IOStatus S2FileSystem::NumFileLinks(const std::string &, const IOOptions &, uint64_t *, IODebugContext *)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
-    IOStatus S2FileSystem::LinkFile(const std::string &, const std::string &, const IOOptions &, IODebugContext *) {
+    IOStatus S2FileSystem::LinkFile(const std::string &, const std::string &, const IOOptions &, IODebugContext *)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 
@@ -395,7 +418,8 @@ namespace ROCKSDB_NAMESPACE
     }
 
     IOStatus S2FileSystem::GetChildrenFileAttributes(const std::string &dir, const IOOptions &options,
-                                                     std::vector<FileAttributes> *result, IODebugContext *dbg) {
+                                                     std::vector<FileAttributes> *result, IODebugContext *dbg)
+    {
         return FileSystem::GetChildrenFileAttributes(dir, options, result, dbg);
     }
 
@@ -416,7 +440,7 @@ namespace ROCKSDB_NAMESPACE
         int isPresent = MYFS::Get_Path_Inode(this->FileSystemObj, cpath, &ptr);
         if (isPresent)
             return IOStatus::IOError(__FUNCTION__);
-        uint32_t err = MYFS::Load_Children(this->FileSystemObj, ptr, "", result, true);
+        uint32_t err = MYFS::Load_Children(this->FileSystemObj, ptr, "", result, true, "");
         if (err)
             return IOStatus::IOError(__FUNCTION__);
         return IOStatus::OK();
@@ -440,7 +464,8 @@ namespace ROCKSDB_NAMESPACE
 
     IOStatus
     S2FileSystem::ReuseWritableFile(const std::string &fname, const std::string &old_fname, const FileOptions &file_opts,
-                                    std::unique_ptr<FSWritableFile> *result, IODebugContext *dbg) {
+                                    std::unique_ptr<FSWritableFile> *result, IODebugContext *dbg)
+    {
         return IOStatus::IOError(__FUNCTION__);
     }
 

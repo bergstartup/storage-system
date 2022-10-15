@@ -70,6 +70,7 @@ namespace MYFS {
     int LookupMap_Delete(MYFS_META *FSObj, std::string id);
     int LookupMap_Lookup(MYFS_META *FSObj, std::string id, Inode **ptr);
 
-    
+    uint64_t get_FreeDataBlock(MYFS_META *FSObj);
+    uint32_t get_FreeInode(MYFS_META *FSObj);
     int get_blocks_addr(MYFS_META *FSObj, Inode *ptr, uint64_t offset, uint64_t size, std::vector<uint64_t> *addresses, bool forWrite);
 }

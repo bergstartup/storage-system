@@ -29,7 +29,7 @@ SOFTWARE.
 #include "rocksdb/status.h"
 
 #include <zns_device.h>
-#include <MYFS.h>
+#include "MYFS.h"
 #include <iostream>
 
 
@@ -41,7 +41,7 @@ namespace ROCKSDB_NAMESPACE
     public:
         // No copying allowed
         S2FileSystem(std::string uri, bool debug);
-        S2FileSystem(const S2FileSystem&) = delete;
+        S2FileSystem(const S2FileSystem &) = delete;
         virtual ~S2FileSystem();
 
         IOStatus IsDirectory(const std::string &, const IOOptions &options, bool *is_dir, IODebugContext *) override;
@@ -95,9 +95,9 @@ namespace ROCKSDB_NAMESPACE
         GetAbsolutePath(const std::string &db_path, const IOOptions &options, std::string *output_path,
                         IODebugContext *dbg);
 
-        IOStatus DeleteFile(const std::string& fname,
-                            const IOOptions& options,
-                            IODebugContext* dbg);
+        IOStatus DeleteFile(const std::string &fname,
+                            const IOOptions &options,
+                            IODebugContext *dbg);
 
         IOStatus
         NewLogger(const std::string &fname, const IOOptions &io_opts, std::shared_ptr<Logger> *result,
@@ -139,4 +139,4 @@ namespace ROCKSDB_NAMESPACE
     };
 }
 
-#endif //STOSYS_PROJECT_S2FILESYSTEM_H
+#endif // STOSYS_PROJECT_S2FILESYSTEM_H

@@ -3,6 +3,7 @@
 #include <sys/mman.h>
 #include <vector>
 #include "./MYFS_IO.h"
+#include <cstring>
 
 namespace MYFS {
     int Load_From_NVM(MYFS_META *FSObj, uint64_t addr, void *buffer, uint64_t size)

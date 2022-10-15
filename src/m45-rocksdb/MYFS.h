@@ -3,7 +3,7 @@
 #include "rocksdb/file_system.h"
 #include "rocksdb/status.h"
 
-#include "./MYFS_IO.h"
+#include "MYFS_IO.h"
 #include <iostream>
 
 
@@ -13,10 +13,10 @@ namespace MYFS {
     void Get_EntityName(std::string path, std::string &entityName);
     void Clean_Path(std::string path, std::string &newPath);
 
-    uint32_t Load_Children(MYFS_META *FSObj, Inode *ptr, std::string entityName, std::vector<std::string> *children, bool loadChildren, std::string targetName = "");
+    uint32_t Load_Children(MYFS_META *FSObj, Inode *ptr, std::string entityName, std::vector<std::string> *children, bool loadChildren, std::string targetName);
     int Get_Path_Inode(MYFS_META *FSObj, std::string path, Inode **ptr);
     int Rename_Child_In_Parent(MYFS_META *FSObj, std::string Ppath, std::string targetName, std::string srcName);
-    int Update_Parent(MYFS_META *FSObj, std::string Ppath, std::string childName, uint32_t childInode, bool del = false);
+    int Update_Parent(MYFS_META *FSObj, std::string Ppath, std::string childName, uint32_t childInode, bool del);
     
     int MYFS_CreateFile(MYFS_META *FSObj, std::string path);
     int MYFS_CreateDir(MYFS_META *FSObj, std::string path); 

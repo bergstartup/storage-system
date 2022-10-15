@@ -1,6 +1,6 @@
 #include <string>
 #include <iostream>
-#include "./MYFS.h"
+#include "MYFS.h"
 
 
 namespace MYFS {
@@ -255,7 +255,7 @@ namespace MYFS {
 
     /*--------------------CLASS DEFS------------------------*/
     // MYFS_File definition
-    MYFS_File::MYFS_File(std::string filePath, MYFS *FSObj)
+    MYFS_File::MYFS_File(std::string filePath, MYFS_META *FSObj)
     {
         this->FSObj = FSObj;
         Get_Path_Inode(FSObj, filePath, &(this->ptr));
@@ -346,18 +346,20 @@ namespace MYFS {
         // Flush Inode changes to Disk
     }
 
+
+
     // Def of MYFS_SequentialFile
-    MYFS_SequentialFile::MYFS_SequentialFile(std::string fpath, MYFS *FSObj)
+    MYFS_SequentialFile::MYFS_SequentialFile(std::string fpath, MYFS_META *FSObj)
     {
         this->fp = new MYFS_File(fpath, FSObj);
     }
 
-    IOStatus MYFS_SequentialFile::Read(size_t n, const IOOptions &opts, Slice *result, char *scratch, IODebugContext *dbg)
+    ROCKSDB_NAMESPACE::IOStatus MYFS_SequentialFile::Read(size_t n, const ROCKSDB_NAMESPACE::IOOptions &opts,ROCKSDB_NAMESPACE::Slice *result, char *scratch, ROCKSDB_NAMESPACE::IODebugContext *dbg)
     {
         
         int sizeW = this->fp->Read(n, scratch);
-        *result = Slice(scratch, sizeW);
-        return IOStatus::OK();
+        *result = ROCKSDB_NAMESPACE::Slice(scratch, sizeW);
+        return ROCKSDB_NAMESPACE::IOStatus::OK();
     }
 
     // IOStatus MYFS_SequentialFile::PositionedRead(uint64_t offset, size_t n, const IOOptions &opts, Slice *result,
@@ -370,57 +372,57 @@ namespace MYFS {
     //     return IOStatus::OK();
     // }
 
-    IOStatus MYFS_SequentialFile::Skip(uint64_t n)
+    ROCKSDB_NAMESPACE::IOStatus MYFS_SequentialFile::Skip(uint64_t n)
     {
         int err = this->fp->Seek(n);
         if (err)
-            return IOStatus::IOError(__FUNCTION__);
-        return IOStatus::OK();
+            return ROCKSDB_NAMESPACE::IOStatus::IOError(__FUNCTION__);
+        return ROCKSDB_NAMESPACE::IOStatus::OK();
     }
 
     // Def MYFS_RandomAccessFile
-    MYFS_RandomAccessFile::MYFS_RandomAccessFile(std::string fname, MYFS *FSObj)
+    MYFS_RandomAccessFile::MYFS_RandomAccessFile(std::string fname, MYFS_META *FSObj)
     {
         this->fp = new MYFS_File(fname, FSObj);
     }
 
-    IOStatus MYFS_RandomAccessFile::Read(uint64_t offset, size_t n, const IOOptions &opts, Slice *result, char *scratch,
-                                         IODebugContext *dbg) const
+    ROCKSDB_NAMESPACE::IOStatus MYFS_RandomAccessFile::Read(uint64_t offset, size_t n, const ROCKSDB_NAMESPACE::IOOptions &opts, ROCKSDB_NAMESPACE::Slice *result, char *scratch,
+                                         ROCKSDB_NAMESPACE::IODebugContext *dbg) const
     {
         int sizeW = this->fp->PRead(offset, n, scratch);
-        *result = Slice(scratch, sizeW);
-        return IOStatus::OK();
+        *result = ROCKSDB_NAMESPACE::Slice(scratch, sizeW);
+        return ROCKSDB_NAMESPACE::IOStatus::OK();
     }
 
     // Def MYFS_WritableFile
-    MYFS_WritableFile::MYFS_WritableFile(std::string fname, MYFS *FSObj)
+    MYFS_WritableFile::MYFS_WritableFile(std::string fname, MYFS_META *FSObj)
     {
         this->fp = new MYFS_File(fname, FSObj);
         this->cache = false;
         this->cacheSize = 0;
     }
 
-    IOStatus MYFS_WritableFile::Truncate(uint64_t size, const IOOptions &opts, IODebugContext *dbg)
+    ROCKSDB_NAMESPACE::IOStatus MYFS_WritableFile::Truncate(uint64_t size, const ROCKSDB_NAMESPACE::IOOptions &opts, ROCKSDB_NAMESPACE::IODebugContext *dbg)
     {
         int err = this->fp->Truncate(size);
         if (err)
-            return IOStatus::IOError(__FUNCTION__);
-        return IOStatus::OK();
+            return ROCKSDB_NAMESPACE::IOStatus::IOError(__FUNCTION__);
+        return ROCKSDB_NAMESPACE::IOStatus::OK();
     }
 
-    IOStatus MYFS_WritableFile::ClearCache() {
+    ROCKSDB_NAMESPACE::IOStatus MYFS_WritableFile::ClearCache() {
         if(!this->cache)
-            return IOStatus::OK();
+            return ROCKSDB_NAMESPACE::IOStatus::OK();
         this->cache = false;
         int err = this->fp->Append(this->cacheSize, this->cacheData);
         if (err)
-            return IOStatus::IOError(__FUNCTION__);
+            return ROCKSDB_NAMESPACE::IOStatus::IOError(__FUNCTION__);
         free(this->cacheData);
         this->cacheSize = 0;
-        return IOStatus::OK();
+        return ROCKSDB_NAMESPACE::IOStatus::OK();
     }
 
-    IOStatus MYFS_WritableFile::Append(const Slice &data, const IOOptions &opts, IODebugContext *dbg)
+    ROCKSDB_NAMESPACE::IOStatus MYFS_WritableFile::Append(const ROCKSDB_NAMESPACE::Slice &data, const ROCKSDB_NAMESPACE::IOOptions &opts, ROCKSDB_NAMESPACE::IODebugContext *dbg)
     {
         
         char *block = (char *)data.data();
@@ -436,19 +438,19 @@ namespace MYFS {
             //If size > 4096 clear cache
             if(this->cacheSize >= 4096*200)
                 this->ClearCache();
-            return IOStatus::OK();
+            return ROCKSDB_NAMESPACE::IOStatus::OK();
         } else if(size < 4096*200) {
             //Append to cache
             this->cache = true;
             this->cacheData = (char *)calloc(1, size);
             memcpy(this->cacheData, block, size);
             this->cacheSize = size;
-            return IOStatus::OK();
+            return ROCKSDB_NAMESPACE::IOStatus::OK();
         }
         int err = this->fp->Append(size, block);
         if (err)
-            return IOStatus::IOError(__FUNCTION__);
-        return IOStatus::OK();
+            return ROCKSDB_NAMESPACE::IOStatus::IOError(__FUNCTION__);
+        return ROCKSDB_NAMESPACE::IOStatus::OK();
     }
 
 
