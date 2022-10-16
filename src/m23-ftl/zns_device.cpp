@@ -216,11 +216,13 @@ int init_ss_zns_device(zdev_init_params *params, user_zns_device **my_dev)
     info->bitmap_size = ((info->zone_num_pages - 1U) >> 3U) + 1U;
     if (params->force_reset || !blocks_info_size) {
         // reset device
-        ret = nvme_zns_mgmt_send(info->fd, info->nsid, 0ULL, true,
-                                 NVME_ZNS_ZSA_RESET, 0U, NULL);
-        if (ret) {
-            printf("Zone reset failed %d\n", ret);
-            return ret;
+        if (params->force_reset) {
+            ret = nvme_zns_mgmt_send(info->fd, info->nsid, 0ULL, true,
+                                    NVME_ZNS_ZSA_RESET, 0U, NULL);
+            if (ret) {
+                printf("Zone reset failed %d\n", ret);
+                return ret;
+            }
         }
         // set logical block
         for (uint32_t i = 0U; i < info->num_data_zones; ++i) {
