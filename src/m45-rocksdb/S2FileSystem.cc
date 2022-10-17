@@ -996,12 +996,13 @@ namespace ROCKSDB_NAMESPACE
 
     int MYFS_File::PRead(uint64_t offset, uint64_t size, char *data)
     {
+        
         if (ptr->FileSize < offset + size) {
             if(offset >= ptr->FileSize)
                 return 0;
             size = ptr->FileSize - offset;
         } 
-
+        std::cout<<"Read : "<<this->ptr->EntityName<<" "<<offset<<" "<<size<<std::endl;
         std::vector<uint64_t> addresses_to_read;
         int err = get_blocks_addr(this->FSObj, this->ptr, offset, size, &addresses_to_read, false);
         if (err)
@@ -1055,7 +1056,7 @@ namespace ROCKSDB_NAMESPACE
 
         memcpy(buffer + smargin, data, size);
         for (int i = 0; i < addresses_to_read.size(); i++)
-            Store_To_NVM(this->FSObj, addresses_to_read.at(i), data + (i * 4096), 4096);
+            Store_To_NVM(this->FSObj, addresses_to_read.at(i), buffer + (i * 4096), 4096);
 
         // Update file size
         this->ptr->FileSize = offset + size;
