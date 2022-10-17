@@ -313,8 +313,6 @@ namespace ROCKSDB_NAMESPACE
 
         Load_From_NVM(FSObj, address, iptr, INODE_SIZE);
         std::cout<<"Load File : "<<entityName<<" "<<index<<" @"<<address<<" But,"<<iptr->EntityName<<" "<<iptr->Inode_no<<std::endl;
-        //if (notPresent)
-        //   return -1;
 
         // Put it in lookup Map
         LookupMap_Insert(FSObj, path, iptr);
@@ -325,35 +323,16 @@ namespace ROCKSDB_NAMESPACE
     //Renaming
     int Rename_Child_In_Parent(MYFS *FSObj, std::string Ppath, std::string srcName, std::string targetName)
     {
-        // FIXME: Logic for rename
         Inode *parentInode;
         int isPresent = Get_Path_Inode(FSObj, Ppath, &parentInode);
         uint32_t rename = Load_Children(FSObj, parentInode, srcName, NULL, false, targetName);
         return rename;
     }
 
-     void MYFS_DeletePath(MYFS *FSObj, std::string path)
-    {
-        Inode *ptr;
-        int notPresent = Get_Path_Inode(FSObj, path, &ptr);
-        if (notPresent)
-            return;
-        
-        //Update parent
-        std::string entityName, ppath;
-        Get_EntityName(path, entityName);
-        Get_ParentPath(path, ppath);
-        Rename_Child_In_Parent(FSObj, ppath, entityName, "<del>");
-        
-        //Change lookupmap
-        LookupMap_Delete(FSObj, path);
-        FSObj->InodeBitMap[ptr->Inode_no] = false;
-        //Free Data zones
-        free(ptr);
-    }
+    
 
     //For creation
-    int Update_Parent(MYFS *FSObj, std::string Ppath, std::string childName, uint32_t childInode, bool del = false)
+    int Update_Parent(MYFS *FSObj, std::string Ppath, std::string childName, uint32_t childInode)
     {
         // FIXME: Logic for deletion
         Inode *ptr;
@@ -367,7 +346,7 @@ namespace ROCKSDB_NAMESPACE
 
         MYFS_Dir *dirPtr;
         dirPtr = (MYFS_Dir *)calloc(1, sizeof(MYFS_Dir));
-        int index = (++ptr->FileSize) / 16;
+        int index = (ptr->FileSize) / 16;
         uint64_t addr = ptr->Direct_data_lbas[index];
 
         if (!addr)
@@ -382,15 +361,36 @@ namespace ROCKSDB_NAMESPACE
                 return -1;
         }
 
-        index = ptr->FileSize % 16;
-        dirPtr->Entities[index - 1] = dirDataptr;
+        index = (ptr->FileSize) % 16;
+        std::cout<<"FS : "<<ptr->FileSize<<" "<<index<<std::endl;
+        dirPtr->Entities[index] = dirDataptr;
         Store_To_NVM(FSObj, addr, dirPtr, 4096);
+        ptr->FileSize++;
         free(dirPtr);
 
         return 0;
     }
 
-   
+   void MYFS_DeletePath(MYFS *FSObj, std::string path)
+    {
+        Inode *ptr, *parentInode;
+        int notPresent = Get_Path_Inode(FSObj, path, &ptr);
+        if (notPresent)
+            return;
+        
+        //Update parent
+        std::string entityName, ppath;
+        Get_EntityName(path, entityName);
+        Get_ParentPath(path, ppath);
+        Rename_Child_In_Parent(FSObj, ppath, entityName, "<del>");
+        //Get_Path_Inode(FSObj, ppath, &parentInode);
+        //parentInode->FileSize -=1;
+        //Change lookupmap
+        LookupMap_Delete(FSObj, path);
+        FSObj->InodeBitMap[ptr->Inode_no] = false;
+        //Free Data zones
+        free(ptr);
+    }
 
     int MYFS_CreateFile(MYFS *FSObj, std::string path)
     {
@@ -823,13 +823,11 @@ namespace ROCKSDB_NAMESPACE
         std::string entityName;
         Get_EntityName(cpath_src, entityName);
         Get_Path_Inode(this->FileSystemObj, cpath_src, &sourceptr);
-        LookupMap_Delete(this->FileSystemObj, cpath_src);
-
         LookupMap_Insert(this->FileSystemObj, cpath_target, sourceptr);
+        LookupMap_Delete(this->FileSystemObj, cpath_src);
         std::string targetEntityName;
         Get_EntityName(cpath_target, targetEntityName);
         strcpy(sourceptr->EntityName, targetEntityName.c_str());
-
         std::string parentPath;
         Get_ParentPath(cpath_target, parentPath);
         int parentUpdated = Rename_Child_In_Parent(this->FileSystemObj, parentPath, entityName, targetEntityName);
@@ -898,11 +896,11 @@ namespace ROCKSDB_NAMESPACE
 
     int get_blocks_addr(MYFS *FSObj, Inode *ptr, uint64_t offset, uint64_t size, std::vector<uint64_t> *addresses, bool forWrite)
     {
-        uint32_t curr = offset / 4096, end = (offset+size) / 4096;
-        uint64_t if_dirty_addr;
         uint64_t *data_block_lba_ptr, next_indirect_block_addr;
-        uint32_t no_of_data_block_ptrs;
         Indirect_ptr *iptr = NULL;
+        uint32_t curr = offset / 4096, end = (offset+size) / 4096;
+        uint32_t no_of_data_block_ptrs;
+        
         // Load the direct ptr
         if (curr < 480)
         {
@@ -910,7 +908,6 @@ namespace ROCKSDB_NAMESPACE
             data_block_lba_ptr = ptr->Direct_data_lbas;
             no_of_data_block_ptrs = 480;
             next_indirect_block_addr = ptr->Indirect_ptr_lbas;
-            if_dirty_addr = 4096 + (ptr->Inode_no * INODE_SIZE);
         }
         else
         {
@@ -930,7 +927,6 @@ namespace ROCKSDB_NAMESPACE
             next_indirect_block_addr = iptr->Indirect_ptr_lbas;
             no_of_data_block_ptrs = 510;
             curr = curr % 510;
-            if_dirty_addr = iptr->Current_addr;
         }
 
         uint64_t addr;
@@ -954,7 +950,7 @@ namespace ROCKSDB_NAMESPACE
                     if (iptr == NULL)
                     {
                         ptr->Indirect_ptr_lbas = next_indirect_block_addr;
-                        Store_To_NVM(FSObj, 4096 + (ptr->Inode_no * INODE_SIZE), ptr, 4096);
+                        Store_To_NVM(FSObj, SUPER_BLOCK_SIZE + (ptr->Inode_no * INODE_SIZE), ptr, 4096);
                         
                     }
                     else
@@ -982,14 +978,9 @@ namespace ROCKSDB_NAMESPACE
 
         // Store dirty block to NVM
         if (iptr == NULL)
-        {
-            // addresses->push_back();
-            Store_To_NVM(FSObj, 4096 + (ptr->Inode_no * INODE_SIZE), ptr, 4096);
-        }
+            Store_To_NVM(FSObj, SUPER_BLOCK_SIZE + (ptr->Inode_no * INODE_SIZE), ptr, 4096);
         else
-        {
             Store_To_NVM(FSObj, iptr->Current_addr, iptr, 4096);
-        }
 
         free(iptr);
         return 0;
@@ -1152,11 +1143,11 @@ namespace ROCKSDB_NAMESPACE
     IOStatus MYFS_WritableFile::ClearCache() {
         if(!this->cache)
             return IOStatus::OK();
-        this->cache = false;
         int err = this->fp->Append(this->cacheSize, this->cacheData);
         if (err)
             return IOStatus::IOError(__FUNCTION__);
         free(this->cacheData);
+        this->cache = false;
         this->cacheSize = 0;
         return IOStatus::OK();
     }
@@ -1191,22 +1182,4 @@ namespace ROCKSDB_NAMESPACE
             return IOStatus::IOError(__FUNCTION__);
         return IOStatus::OK();
     }
-
-    // MYFS_Directory::MYFS_Directory(std::string name) {
-    //     std::cout<<"For checl"<<std::endl;
-    // }
-    /*
-    IOStatus MYFS_WritableFile::PositionedAppend(const Slice &data, uint64_t offset, const IOOptions &opts,
-                                                 IODebugContext *dbg)
-    {
-
-        char *block = (char *)data.data();
-        uint64_t size = data.size();
-        int err = this->fp->PAppend(offset, size, block);
-        std::cout<<"PAppend size : "<<size<<" "<<offset<<std::endl;
-        if (err)
-            return IOStatus::IOError(__FUNCTION__);
-        return IOStatus::OK();
-    }
-    */
 }
