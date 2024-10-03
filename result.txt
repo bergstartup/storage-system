@@ -1,0 +1,973 @@
+VM ID: 0
+Repeats: 5
+Group number: group19
+Group commit: "9ae163c5d6b639fc38d1cbe3d8201ed6929516c6"
+
+Milestone m45
+	Directory: 2022-stosys-group19
+	Start compiling ...
+		rm -r CMakeCache.txt CMakeFiles Makefile bin cmake_install.cmake lib
+		cd libnvme && make clean
+		cmake .
+		make -j
+	Execute code for experiment 0
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100 -k 10 -v 10
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100, each entry ksize 10 bytes, vsize 10 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100 entries, max size 20
+		a testmap is filled with 100 of max_size 20 each
+		All values inserted, number of entries 100, expected size stores would be 2000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 319 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 0
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100 -k 10 -v 10
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100, each entry ksize 10 bytes, vsize 10 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100 entries, max size 20
+		a testmap is filled with 100 of max_size 20 each
+		All values inserted, number of entries 100, expected size stores would be 2000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 258 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 0
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100 -k 10 -v 10
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100, each entry ksize 10 bytes, vsize 10 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100 entries, max size 20
+		a testmap is filled with 100 of max_size 20 each
+		All values inserted, number of entries 100, expected size stores would be 2000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 145 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 0
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100 -k 10 -v 10
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100, each entry ksize 10 bytes, vsize 10 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100 entries, max size 20
+		a testmap is filled with 100 of max_size 20 each
+		All values inserted, number of entries 100, expected size stores would be 2000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 251 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 0
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100 -k 10 -v 10
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100, each entry ksize 10 bytes, vsize 10 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100 entries, max size 20
+		a testmap is filled with 100 of max_size 20 each
+		All values inserted, number of entries 100, expected size stores would be 2000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 144 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 1
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 200
+		a testmap is filled with 10000 of max_size 200 each
+		All values inserted, number of entries 10000, expected size stores would be 2000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 4776 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 1
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 200
+		a testmap is filled with 10000 of max_size 200 each
+		All values inserted, number of entries 10000, expected size stores would be 2000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 5040 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 1
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 200
+		a testmap is filled with 10000 of max_size 200 each
+		All values inserted, number of entries 10000, expected size stores would be 2000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 4599 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 1
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 200
+		a testmap is filled with 10000 of max_size 200 each
+		All values inserted, number of entries 10000, expected size stores would be 2000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 4619 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 1
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 200
+		a testmap is filled with 10000 of max_size 200 each
+		All values inserted, number of entries 10000, expected size stores would be 2000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 4623 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 2
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 1000 -v 1000
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 1000 bytes, vsize 1000 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 2000
+		a testmap is filled with 10000 of max_size 2000 each
+		All values inserted, number of entries 10000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 8070 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 2
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 1000 -v 1000
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 1000 bytes, vsize 1000 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 2000
+		a testmap is filled with 10000 of max_size 2000 each
+		All values inserted, number of entries 10000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 8112 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 2
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 1000 -v 1000
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 1000 bytes, vsize 1000 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 2000
+		a testmap is filled with 10000 of max_size 2000 each
+		All values inserted, number of entries 10000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 8143 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 2
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 1000 -v 1000
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 1000 bytes, vsize 1000 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 2000
+		a testmap is filled with 10000 of max_size 2000 each
+		All values inserted, number of entries 10000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 8207 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 2
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 10000 -k 1000 -v 1000
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 10000, each entry ksize 1000 bytes, vsize 1000 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 10000 entries, max size 2000
+		a testmap is filled with 10000 of max_size 2000 each
+		All values inserted, number of entries 10000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 10000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 8078 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 3
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100000 entries, max size 200
+		a testmap is filled with 100000 of max_size 200 each
+		All values inserted, number of entries 100000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 48751 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 3
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100000 entries, max size 200
+		a testmap is filled with 100000 of max_size 200 each
+		All values inserted, number of entries 100000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 48827 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 3
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100000 entries, max size 200
+		a testmap is filled with 100000 of max_size 200 each
+		All values inserted, number of entries 100000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 48844 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 3
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100000 entries, max size 200
+		a testmap is filled with 100000 of max_size 200 each
+		All values inserted, number of entries 100000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 49140 milliseconds
+		====================================================================
+		--------------------------------------------------
+	Execute code for experiment 3
+		sudo nvme zns reset-zone /dev/nvme0n1 -a
+		sudo rm -rf /tmp/shadowdb
+		sudo ./bin/m45 -D -p s2fs:nvme0n1:///tmp/testdb/ -e 100000 -k 100 -v 100
+	Verify code
+		SUCCESS: Got output as expected
+		--------------------------------------------------
+		==============================================================
+		Welcome to milestone 4/5, which is about integration into RocksDB (also: congratulations for bearing with us so far!)
+		==============================================================
+		==============================================================
+		test_uri s2fs:nvme0n1:///tmp/testdb/ , shadow uri posix:///tmp/shadowdb
+		entries 100000, each entry ksize 100 bytes, vsize 100 bytes, readonly verify : 0 deleteall : 1 single : 0
+		==============================================================
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Database deleted at s2fs:nvme0n1:///tmp/testdb/
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		Database deleted at posix:///tmp/shadowdb
+		Opening database at posix:///tmp/shadowdb with uri posix and the db_path as /tmp/shadowdb
+		Environment from URI posix:///tmp/shadowdb for FS Posix File System
+		## Database opened at posix:///tmp/shadowdb db name is /tmp/shadowdb , attached FS is --> Posix File System<--
+		Opening database at s2fs:nvme0n1:///tmp/testdb/ with uri s2fs:nvme0n1 and the db_path as /tmp/testdb/
+		Initialization uri is s2fs:nvme0n1:///tmp/testdb/ and errmsg:
+		Init MYFS
+		File System params : 97517568 4096 23552
+		Environment from URI s2fs:nvme0n1:///tmp/testdb/ for FS S2FileSytem
+		Delete file called
+		Delete file called
+		## Database opened at s2fs:nvme0n1:///tmp/testdb/ db name is /tmp/testdb/ , attached FS is --> S2FileSytem<--
+		Preparing the map to insert values for 100000 entries, max size 200
+		a testmap is filled with 100000 of max_size 200 each
+		All values inserted, number of entries 100000, expected size stores would be 20000000 bytes
+		Starting data reading from the shadow db at posix:///tmp/shadowdb | single 0
+		**********************************************
+		OK: all 100000 values matched successfully
+		 **********************************************
+		Delete file called
+		database(s) closed, test is done OK
+		====================================================================
+		stosys-stats] The elapsed time is 48664 milliseconds
+		====================================================================
+		--------------------------------------------------
+Total run time: 61813 milliseconds

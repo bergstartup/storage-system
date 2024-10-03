@@ -25,7 +25,8 @@ SOFTWARE.
 
 #include <cstdint>
 
-extern "C"{
+extern "C" {
+
 //https://github.com/mplulu/google-breakpad/issues/481 - taken from here
 #define typeof __typeof__
 #define container_of(ptr, type, member) ({                      \
@@ -48,10 +49,10 @@ struct user_zns_device {
     uint64_t capacity_bytes; // total user device capacity
     struct zns_device_testing_params tparams; // report back some ZNS device-level properties to the user (for testing only, this is not needed for functions
     // your own private data
-    void *_private;
+    void *_private; //Points to zns_info
 };
 
-struct zdev_init_params{
+struct zdev_init_params {
     char *name;
     int log_zones;
     int gc_wmark;
@@ -62,6 +63,7 @@ int init_ss_zns_device(struct zdev_init_params *params, struct user_zns_device *
 int zns_udevice_read(struct user_zns_device *my_dev, uint64_t address, void *buffer, uint32_t size);
 int zns_udevice_write(struct user_zns_device *my_dev, uint64_t address, void *buffer, uint32_t size);
 int deinit_ss_zns_device(struct user_zns_device *my_dev);
+
 };
 
 #endif //STOSYS_PROJECT_ZNS_DEVICE_H
