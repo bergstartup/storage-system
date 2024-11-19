@@ -50,4 +50,3 @@ namespace ROCKSDB_NAMESPACE {
                         return ret_fs->get();
                     });
 }
-
