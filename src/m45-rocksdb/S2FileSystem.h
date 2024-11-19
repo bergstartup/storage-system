@@ -34,11 +34,17 @@ SOFTWARE.
 #define LOOKUP_MAP_SIZE 1000
 #define MAX_INODE_COUNT 255
 #define INODE_SIZE 4096
-#define SUPER_BLOCK_SIZE 4096
+#define SUPER_BLOCK_SIZE 4096*2
 #define STRINGENCODE 31
 #define DATA_BLOCKS_OFFSET 256
 namespace ROCKSDB_NAMESPACE
 {
+    struct SuperBlock
+    {
+        bool persistent;
+        uint64_t inodeBlockPtr;
+        uint64_t dataBlockPtr;
+    };
 
     struct Inode
     {
@@ -109,6 +115,7 @@ namespace ROCKSDB_NAMESPACE
         struct Inode *ptr;
         MYFS *FSObj;
 	    uint64_t curr_read_offset;
+        void *current_ptr;
 
     public:
         MYFS_File(std::string filePath, MYFS *FSObj);
@@ -177,10 +184,13 @@ namespace ROCKSDB_NAMESPACE
     {
     private:
         MYFS_File *fp;
-
+        bool cache;
+        uint64_t cacheSize;
+        char *cacheData;
+        virtual IOStatus ClearCache();
     public:
         MYFS_WritableFile(std::string fname, MYFS *FSObj);
-        virtual ~MYFS_WritableFile(){delete this->fp;}
+        virtual ~MYFS_WritableFile(){this->ClearCache();delete this->fp;}
         virtual IOStatus Truncate(uint64_t size, const IOOptions &opts,
                                   IODebugContext *dbg) override;
         virtual IOStatus Close(const IOOptions &opts, IODebugContext *dbg) {return IOStatus::OK();};
@@ -331,4 +341,4 @@ namespace ROCKSDB_NAMESPACE
     };
 }
 
-#endif // STOSYS_PROJECT_S2FILESYSTEM_H
+#endif //STOSYS_PROJECT_S2FILESYSTEM_H

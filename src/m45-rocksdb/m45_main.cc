@@ -62,6 +62,7 @@ static int fill_up_map(std::map<std::string,std::string> &testmap, int entries, 
     }
     std::cout<<"a testmap is filled with " << entries << " of max_size " << (ksize + vsize) << " each \n";
     return 0;
+    
 }
 
 static int allocate_myrocks_context(struct MyRocksContext *&ctx){
